@@ -1,4 +1,4 @@
-FROM maven:3.9.9-eclipse-temurin-17-alpine@sha256:c1b318f88ab1bcf7aae3e0fceff4f5890fe6f7c910ead1c538bd5cada01df6c6 AS builder
+FROM maven:3.9.9-eclipse-temurin-17 AS builder
 
 WORKDIR /app
 
@@ -18,6 +18,8 @@ RUN mvn \
 # Copy source code after dependencies are downloaded
 COPY src ./src
 
+# Copy build and test scripts
+COPY build_code.sh ./
 COPY run_tests.sh ./
 
 # Keep the compiled classes and dependencies available
